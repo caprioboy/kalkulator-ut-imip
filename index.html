@@ -8,9 +8,8 @@
     <style>
         :root {
             --imip-dark: #004d73;
-            --imip-accent: #f0f4f8;
-            --card-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            --radius: 16px;
+            --radius: 12px;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         body {
@@ -25,103 +24,98 @@
         header {
             background-color: var(--imip-dark);
             color: white;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 6px solid #ffca28;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #ffca28;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .header-logo {
-            max-width: 260px;
+            max-width: 240px;
             width: 100%;
             height: auto;
-            margin-bottom: 15px;
-            display: inline-block;
+            margin-bottom: 10px;
             background: white;
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
         }
 
         header h1 {
             font-size: 18px;
-            margin: 10px 0 5px 0;
+            margin: 5px 0;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.5;
         }
 
-        .portal-name {
-            font-size: 14px;
-            font-weight: 400;
-            opacity: 0.9;
-            letter-spacing: 1px;
-        }
+        .portal-name { font-size: 14px; opacity: 0.9; }
 
-        /* CONTAINER UTAMA (CENTERED) */
+        /* CONTAINER */
         .container {
-            max-width: 600px; /* Dibuat ramping biar estetik */
-            margin: -30px auto 50px; /* Overlap header sedikit */
+            max-width: 1000px;
+            margin: 30px auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 10;
         }
 
-        /* STYLE UMUM CARD */
-        .input-card, .diagram-box, .result-card {
+        /* 1. INPUT SECTION (TENGAH ATAS) */
+        .input-section {
+            max-width: 600px; /* Lebar dibatasi biar rapi di tengah */
+            margin: 0 auto 30px; /* Posisi tengah (auto) dan jarak bawah 30px */
+        }
+
+        .input-card {
             background: white;
+            padding: 25px;
             border-radius: var(--radius);
             box-shadow: var(--card-shadow);
-            margin-bottom: 20px;
-        }
-
-        /* INPUT CARD */
-        .input-card {
-            padding: 30px;
-            border-top: 5px solid var(--imip-dark);
+            border-top: 4px solid var(--imip-dark);
         }
 
         .form-title {
             text-align: center;
             color: var(--imip-dark);
-            margin-bottom: 25px;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 18px;
         }
 
-        .input-group { margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; }
         
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             font-size: 14px;
-            color: #475569;
+            color: #555;
         }
 
         input {
             width: 100%;
-            padding: 16px;
+            padding: 12px;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: all 0.3s ease;
-            background: #f8fafc;
-            color: #334155;
-            font-weight: 600;
+            background: #fcfcfc;
+        }
+        input:focus { border-color: var(--imip-dark); outline: none; background: white; }
+
+
+        /* 2. BOTTOM SECTION (HASIL KIRI - DIAGRAM KANAN) */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr; /* Default Mobile: 1 Kolom ke bawah */
+            gap: 25px;
+            align-items: start;
         }
 
-        input:focus {
-            border-color: var(--imip-dark);
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(0, 77, 115, 0.1);
+        /* Tampilan Laptop/Tablet: Pecah jadi 2 Kolom */
+        @media (min-width: 768px) {
+            .bottom-section {
+                grid-template-columns: 1.2fr 1fr; /* Kiri agak lebih lebar (1.2) dari kanan (1) */
+            }
         }
 
-        /* HASIL (RESULTS) */
+        /* RESULT CARDS (KIRI) */
         .result-grid {
             display: flex;
             flex-direction: column;
@@ -129,61 +123,43 @@
         }
 
         .result-card {
-            padding: 20px 25px;
-            border-left: 8px solid;
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            border-left: 6px solid;
+            box-shadow: var(--card-shadow);
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px; /* Jarak antar kartu */
         }
 
-        .res-left { flex: 1; }
-        .res-right { text-align: right; }
-
-        /* Warna Kartu */
         .res-half { background: #fff1f2; border-color: #e11d48; }
         .res-full { background: #eff6ff; border-color: #2563eb; }
         .res-onehalf { background: #fff7ed; border-color: #ea580c; }
 
-        .res-title {
-            display: block;
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #334155;
-        }
+        .res-left { flex: 1; }
+        .res-right { text-align: right; }
 
-        .res-value {
-            font-weight: 800;
-            font-size: 28px;
-            color: #0f172a;
-        }
-
-        .res-desc {
-            font-size: 12px;
-            color: #64748b;
-            margin-top: 5px;
-        }
+        .res-title { display: block; font-weight: 700; font-size: 16px; color: #334155; margin-bottom: 5px; }
+        .res-value { font-weight: 800; font-size: 26px; color: #0f172a; }
+        .res-desc { font-size: 12px; color: #64748b; margin-top: 5px; }
 
         .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: inline-block; padding: 3px 8px; border-radius: 4px;
+            font-size: 10px; font-weight: 800; text-transform: uppercase;
         }
-        
         .bg-root { background: #ffe4e6; color: #9f1239; }
         .bg-cap { background: #dbeafe; color: #1e40af; }
         .bg-check { background: #ffedd5; color: #9a3412; }
 
-        /* DIAGRAM BOX (BAWAH) */
+        /* DIAGRAM BOX (KANAN) */
         .diagram-box {
+            background: white;
             padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
             text-align: center;
-            margin-top: 30px;
         }
         
         .diagram-title {
@@ -192,14 +168,13 @@
             color: #64748b;
             margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .diagram-img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #eee;
         }
 
         footer {
@@ -209,7 +184,6 @@
             color: #94a3b8;
             padding-bottom: 30px;
         }
-
     </style>
 </head>
 <body>
@@ -222,58 +196,62 @@
 
 <div class="container">
     
-    <div class="input-card">
-        <div class="form-title">Kalkulator UT Skip</div>
-        <div class="input-group">
-            <label>Ketebalan Material (t) mm</label>
-            <input type="number" id="thickness" placeholder="0" oninput="calculate()">
-        </div>
-        <div class="input-group">
-            <label>Sudut Probe (Angle) °</label>
-            <input type="number" id="angle" placeholder="60" value="60" oninput="calculate()">
+    <div class="input-section">
+        <div class="input-card">
+            <div class="form-title">Kalkulator UT Skip Distance</div>
+            <div class="input-group">
+                <label>Ketebalan Material (t) mm</label>
+                <input type="number" id="thickness" placeholder="0" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Sudut Probe (Angle) °</label>
+                <input type="number" id="angle" placeholder="60" value="60" oninput="calculate()">
+            </div>
         </div>
     </div>
 
-    <div class="result-grid">
+    <div class="bottom-section">
         
-        <div class="result-card res-half">
-            <div class="res-left">
-                <span class="res-title">1/2 Skip</span>
-                <span class="badge bg-root">ROOT / LOP</span>
-                <div class="res-desc">Target: Akar Las (Root)</div>
+        <div class="result-grid">
+            <div class="result-card res-half">
+                <div class="res-left">
+                    <span class="res-title">1/2 Skip</span>
+                    <span class="badge bg-root">ROOT</span>
+                    <div class="res-desc">Target: Akar Las / LOP</div>
+                </div>
+                <div class="res-right">
+                    <span class="res-value" id="val-half">-</span> <small>mm</small>
+                </div>
             </div>
-            <div class="res-right">
-                <span class="res-value" id="val-half">-</span> <small>mm</small>
+
+            <div class="result-card res-full">
+                <div class="res-left">
+                    <span class="res-title">Full Skip</span>
+                    <span class="badge bg-cap">CAP</span>
+                    <div class="res-desc">Target: Permukaan Atas</div>
+                </div>
+                <div class="res-right">
+                    <span class="res-value" id="val-full">-</span> <small>mm</small>
+                </div>
+            </div>
+
+            <div class="result-card res-onehalf">
+                <div class="res-left">
+                    <span class="res-title">1½ Skip</span>
+                    <span class="badge bg-check">CHECK</span>
+                    <div class="res-desc">Konfirmasi Root</div>
+                </div>
+                <div class="res-right">
+                    <span class="res-value" id="val-onehalf">-</span> <small>mm</small>
+                </div>
             </div>
         </div>
 
-        <div class="result-card res-full">
-            <div class="res-left">
-                <span class="res-title">Full Skip</span>
-                <span class="badge bg-cap">CAP / BODY </span>
-                <div class="res-desc">Target: Permukaan Atas /Tengah Las</div>
-            </div>
-            <div class="res-right">
-                <span class="res-value" id="val-full">-</span> <small>mm</small>
-            </div>
+        <div class="diagram-box">
+            <div class="diagram-title">Visualisasi Beam Path</div>
+            <img src="diagram.jpg" alt="Skema UT Skip" class="diagram-img">
         </div>
 
-        <div class="result-card res-onehalf">
-            <div class="res-left">
-                <span class="res-title">1½ Skip</span>
-                <span class="badge bg-check">CHECK</span>
-                <div class="res-desc">Konfirmasi Root</div>
-            </div>
-            <div class="res-right">
-                <span class="res-value" id="val-onehalf">-</span> <small>mm</small>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="diagram-box">
-        <div class="diagram-title">Visualisasi Beam Path</div>
-        <img src="diagram.jpg" alt="Skema UT Skip" class="diagram-img">
     </div>
 
     <footer>
@@ -305,4 +283,3 @@
 
 </body>
 </html>
-
