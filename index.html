@@ -7,40 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --imip-dark: #004d73; /* Warna Header Biru Gelap */
+            --imip-dark: #004d73;
             --imip-accent: #f0f4f8;
-            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            --radius: 12px;
+            --card-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --radius: 16px;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc;
+            background-color: #f8fafc;
             margin: 0;
             padding: 0;
             color: #333;
         }
 
-        /* HEADER UPDATE: Logo Gambar */
+        /* HEADER */
         header {
             background-color: var(--imip-dark);
             color: white;
             padding: 40px 20px;
             text-align: center;
-            border-bottom: 5px solid #ffca28; /* Aksen Kuning di bawah header */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-bottom: 6px solid #ffca28;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Pengaturan Ukuran Logo */
         .header-logo {
-            max-width: 280px; /* Ukuran maksimal logo */
+            max-width: 260px;
             width: 100%;
             height: auto;
             margin-bottom: 15px;
             display: inline-block;
-            background: white; /* Jaga-jaga kalau logonya transparan */
-            padding: 10px;
-            border-radius: 8px;
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
         header h1 {
@@ -48,69 +48,80 @@
             margin: 10px 0 5px 0;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.4;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
         }
 
         .portal-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 400;
             opacity: 0.9;
+            letter-spacing: 1px;
         }
 
-        /* Container Utama */
+        /* CONTAINER UTAMA (CENTERED) */
         .container {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 600px; /* Dibuat ramping biar estetik */
+            margin: -30px auto 50px; /* Overlap header sedikit */
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Input Card */
-        .input-card {
+        /* STYLE UMUM CARD */
+        .input-card, .diagram-box, .result-card {
             background: white;
-            padding: 25px;
             border-radius: var(--radius);
             box-shadow: var(--card-shadow);
             margin-bottom: 20px;
-            border-top: 4px solid var(--imip-dark);
+        }
+
+        /* INPUT CARD */
+        .input-card {
+            padding: 30px;
+            border-top: 5px solid var(--imip-dark);
         }
 
         .form-title {
             text-align: center;
             color: var(--imip-dark);
-            margin-bottom: 20px;
-            font-weight: 700;
-            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.5px;
         }
 
-        .input-group { margin-bottom: 15px; }
+        .input-group { margin-bottom: 20px; }
         
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             font-size: 14px;
-            color: #555;
+            color: #475569;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e1e5eb;
-            border-radius: 8px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: all 0.3s;
-            background: #fcfcfc;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            color: #334155;
+            font-weight: 600;
         }
 
         input:focus {
             border-color: var(--imip-dark);
             outline: none;
             background: white;
+            box-shadow: 0 0 0 4px rgba(0, 77, 115, 0.1);
         }
 
-        /* Result Cards */
+        /* HASIL (RESULTS) */
         .result-grid {
             display: flex;
             flex-direction: column;
@@ -118,128 +129,156 @@
         }
 
         .result-card {
-            padding: 20px;
-            border-radius: var(--radius);
-            border-left: 6px solid;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            background: white;
-        }
-
-        .res-half { background: #fff0f3; border-color: #e91e63; }
-        .res-full { background: #e3f2fd; border-color: #2196f3; }
-        .res-onehalf { background: #fff8e1; border-color: #ffb300; }
-
-        .res-header {
+            padding: 20px 25px;
+            border-left: 8px solid;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 15px; /* Jarak antar kartu */
         }
 
-        .res-title { font-weight: 700; font-size: 16px; }
-        .res-value { font-weight: 800; font-size: 24px; color: #222; }
-        .res-desc { font-size: 13px; color: #555; line-height: 1.4; }
-        
+        .res-left { flex: 1; }
+        .res-right { text-align: right; }
+
+        /* Warna Kartu */
+        .res-half { background: #fff1f2; border-color: #e11d48; }
+        .res-full { background: #eff6ff; border-color: #2563eb; }
+        .res-onehalf { background: #fff7ed; border-color: #ea580c; }
+
+        .res-title {
+            display: block;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #334155;
+        }
+
+        .res-value {
+            font-weight: 800;
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .res-desc {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
         .badge {
-            display: inline-block; padding: 2px 6px; border-radius: 4px;
-            font-size: 11px; font-weight: bold; text-transform: uppercase; margin-right: 5px;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .bg-root { background: #ffcdd2; color: #b71c1c; }
-        .bg-cap { background: #bbdefb; color: #0d47a1; }
-        .bg-check { background: #ffecb3; color: #bf360c; }
+        
+        .bg-root { background: #ffe4e6; color: #9f1239; }
+        .bg-cap { background: #dbeafe; color: #1e40af; }
+        .bg-check { background: #ffedd5; color: #9a3412; }
 
-        /* Diagram Box */
+        /* DIAGRAM BOX (BAWAH) */
         .diagram-box {
-            background: white;
-            padding: 15px;
-            border-radius: var(--radius);
-            box-shadow: var(--card-shadow);
+            padding: 20px;
             text-align: center;
-            margin-top: 20px; /* Jaga jarak di mobile */
+            margin-top: 30px;
         }
-        .diagram-img { max-width: 100%; height: auto; border-radius: 8px; }
-
-        footer { text-align: center; margin-top: 40px; font-size: 12px; color: #888; padding-bottom: 20px; }
-
-        /* Responsif Desktop */
-        @media (min-width: 768px) {
-            .content-split {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 25px;
-                align-items: start;
-            }
-            .diagram-box { margin-top: 0; } /* Reset margin di desktop */
+        
+        .diagram-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
+        .diagram-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 12px;
+            color: #94a3b8;
+            padding-bottom: 30px;
+        }
+
     </style>
 </head>
 <body>
 
 <header>
     <img src="logo.png" alt="IMIP Logo" class="header-logo">
-    
     <h1>DEPARTEMEN PENGUJIAN PERALATAN KHUSUS ERM</h1>
     <div class="portal-name">Portal Inspeksi Digital</div>
 </header>
 
 <div class="container">
-    <div class="content-split">
-        <div class="left-side">
-            <div class="input-card">
-                <div class="form-title">Kalkulator UT Skip Distance</div>
-                <div class="input-group">
-                    <label>Ketebalan Material (t) mm</label>
-                    <input type="number" id="thickness" placeholder="Contoh: 10" oninput="calculate()">
-                </div>
-                <div class="input-group">
-                    <label>Sudut Probe (Angle) °</label>
-                    <input type="number" id="angle" placeholder="Contoh: 60" value="60" oninput="calculate()">
-                </div>
-            </div>
-
-            <div class="result-grid">
-                <div class="result-card res-half">
-                    <div class="res-header">
-                        <span class="res-title">1/2 Skip</span>
-                        <span class="res-value" id="val-half">- mm</span>
-                    </div>
-                    <div class="res-desc">
-                        <span class="badge bg-root">ROOT</span> Target: Akar Las / LOP
-                    </div>
-                </div>
-
-                <div class="result-card res-full">
-                    <div class="res-header">
-                        <span class="res-title">Full Skip</span>
-                        <span class="res-value" id="val-full">- mm</span>
-                    </div>
-                    <div class="res-desc">
-                        <span class="badge bg-cap">CAP</span> Target: Permukaan Atas
-                    </div>
-                </div>
-
-                <div class="result-card res-onehalf">
-                    <div class="res-header">
-                        <span class="res-title">1½ Skip</span>
-                        <span class="res-value" id="val-onehalf">- mm</span>
-                    </div>
-                    <div class="res-desc">
-                        <span class="badge bg-check">CHECK</span> Konfirmasi Root
-                    </div>
-                </div>
-            </div>
+    
+    <div class="input-card">
+        <div class="form-title">Kalkulator UT Skip</div>
+        <div class="input-group">
+            <label>Ketebalan Material (t) mm</label>
+            <input type="number" id="thickness" placeholder="0" oninput="calculate()">
         </div>
-
-        <div class="right-side">
-            <div class="diagram-box">
-                <img src="diagram.jpg" alt="Skema UT Skip" class="diagram-img">
-                <p style="font-size: 12px; color: #999; margin-top: 10px;">Visualisasi Pergerakan Gelombang Suara</p>
-            </div>
+        <div class="input-group">
+            <label>Sudut Probe (Angle) °</label>
+            <input type="number" id="angle" placeholder="60" value="60" oninput="calculate()">
         </div>
     </div>
 
+    <div class="result-grid">
+        
+        <div class="result-card res-half">
+            <div class="res-left">
+                <span class="res-title">1/2 Skip</span>
+                <span class="badge bg-root">ROOT / LOP</span>
+                <div class="res-desc">Target: Akar Las</div>
+            </div>
+            <div class="res-right">
+                <span class="res-value" id="val-half">-</span> <small>mm</small>
+            </div>
+        </div>
+
+        <div class="result-card res-full">
+            <div class="res-left">
+                <span class="res-title">Full Skip</span>
+                <span class="badge bg-cap">CAP / BODY</span>
+                <div class="res-desc">Target: Permukaan Atas</div>
+            </div>
+            <div class="res-right">
+                <span class="res-value" id="val-full">-</span> <small>mm</small>
+            </div>
+        </div>
+
+        <div class="result-card res-onehalf">
+            <div class="res-left">
+                <span class="res-title">1½ Skip</span>
+                <span class="badge bg-check">CHECK</span>
+                <div class="res-desc">Konfirmasi Root</div>
+            </div>
+            <div class="res-right">
+                <span class="res-value" id="val-onehalf">-</span> <small>mm</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="diagram-box">
+        <div class="diagram-title">Visualisasi Beam Path</div>
+        <img src="diagram.jpg" alt="Skema UT Skip" class="diagram-img">
+    </div>
+
     <footer>
-        &copy; 2026 Dept. Pengujian Peralatan Khusus ERM - IMIP
+        &copy; 2026 Dept. Pengujian Peralatan Khusus ERM - IMIP<br>
+        Developed by Team Inspeksi
     </footer>
 </div>
 
@@ -252,9 +291,9 @@
             const radian = deg * (Math.PI / 180);
             const tanValue = Math.tan(radian);
             
-            document.getElementById('val-half').innerText = (1 * t * tanValue).toFixed(1) + " mm";
-            document.getElementById('val-full').innerText = (2 * t * tanValue).toFixed(1) + " mm";
-            document.getElementById('val-onehalf').innerText = (3 * t * tanValue).toFixed(1) + " mm";
+            document.getElementById('val-half').innerText = (1 * t * tanValue).toFixed(1);
+            document.getElementById('val-full').innerText = (2 * t * tanValue).toFixed(1);
+            document.getElementById('val-onehalf').innerText = (3 * t * tanValue).toFixed(1);
         } else {
             document.getElementById('val-half').innerText = "-";
             document.getElementById('val-full').innerText = "-";
