@@ -56,10 +56,10 @@
             padding: 0 20px;
         }
 
-        /* 1. INPUT SECTION (TENGAH ATAS) */
+        /* INPUT SECTION (TENGAH) */
         .input-section {
-            max-width: 600px; /* Lebar dibatasi biar rapi di tengah */
-            margin: 0 auto 30px; /* Posisi tengah (auto) dan jarak bawah 30px */
+            max-width: 600px; 
+            margin: 0 auto 30px; 
         }
 
         .input-card {
@@ -88,7 +88,8 @@
             color: #555;
         }
 
-        input {
+        /* Style untuk Input dan Select (Dropdown) */
+        input, select {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
@@ -96,26 +97,48 @@
             font-size: 16px;
             box-sizing: border-box;
             background: #fcfcfc;
+            color: #333;
+            appearance: none; /* Biar tampilan select konsisten */
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
-        input:focus { border-color: var(--imip-dark); outline: none; background: white; }
+        
+        /* Tambah panah kustom untuk dropdown biar cakep */
+        .select-wrapper {
+            position: relative;
+        }
+        .select-wrapper::after {
+            content: "▼";
+            font-size: 12px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+            pointer-events: none;
+        }
 
+        input:focus, select:focus { 
+            border-color: var(--imip-dark); 
+            outline: none; 
+            background: white; 
+        }
 
-        /* 2. BOTTOM SECTION (HASIL KIRI - DIAGRAM KANAN) */
+        /* BOTTOM SECTION (GRID) */
         .bottom-section {
             display: grid;
-            grid-template-columns: 1fr; /* Default Mobile: 1 Kolom ke bawah */
+            grid-template-columns: 1fr;
             gap: 25px;
             align-items: start;
         }
 
-        /* Tampilan Laptop/Tablet: Pecah jadi 2 Kolom */
         @media (min-width: 768px) {
             .bottom-section {
-                grid-template-columns: 1.2fr 1fr; /* Kiri agak lebih lebar (1.2) dari kanan (1) */
+                grid-template-columns: 1.2fr 1fr; 
             }
         }
 
-        /* RESULT CARDS (KIRI) */
+        /* RESULT GRID */
         .result-grid {
             display: flex;
             flex-direction: column;
@@ -128,7 +151,6 @@
             border-radius: var(--radius);
             border-left: 6px solid;
             box-shadow: var(--card-shadow);
-            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -153,7 +175,7 @@
         .bg-cap { background: #dbeafe; color: #1e40af; }
         .bg-check { background: #ffedd5; color: #9a3412; }
 
-        /* DIAGRAM BOX (KANAN) */
+        /* DIAGRAM BOX */
         .diagram-box {
             background: white;
             padding: 20px;
@@ -199,14 +221,24 @@
     <div class="input-section">
         <div class="input-card">
             <div class="form-title">Kalkulator UT Skip Distance</div>
+            
             <div class="input-group">
                 <label>Ketebalan Material (t) mm</label>
-                <input type="number" id="thickness" placeholder="0" oninput="calculate()">
+                <input type="number" id="thickness" placeholder="Masukkan Tebal (Contoh: 10)" oninput="calculate()">
             </div>
+            
             <div class="input-group">
-                <label>Sudut Probe (Angle) °</label>
-                <input type="number" id="angle" placeholder="60" value="60" oninput="calculate()">
+                <label>Sudut Probe (Standar ASME/ASTM)</label>
+                <div class="select-wrapper">
+                    <select id="angle" onchange="calculate()">
+                        <option value="45">45° (Standard)</option>
+                        <option value="60" selected>60° (Standard)</option>
+                        <option value="70">70° (Standard)</option>
+                        <option value="35">35° (Khusus)</option>
+                    </select>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -278,7 +310,7 @@
             document.getElementById('val-onehalf').innerText = "-";
         }
     }
-    calculate();
+    // Tidak auto calculate saat load pertama agar user mengisi tebal dulu
 </script>
 
 </body>
